@@ -58,6 +58,10 @@ const visitor = {
       t.expressionStatement(t.stringLiteral("After"))
     );
 
+  },
+  ObjectProperty(path) {
+    // ObjectProperty的所有同级节点数组，即容器
+    console.log(path.container);
   }
 };
 
