@@ -47,6 +47,7 @@ const visitor = {
         if (path.isIdentifier({ name: "a" })) {
             path.node.name = "y";
         }
+        console.log(path);
 
 
     }
