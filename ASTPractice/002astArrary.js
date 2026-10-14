@@ -73,6 +73,7 @@ traverse(ast, {
     },
     StringLiteral(path) {
 
+        // 生成密文，并检查是否在数组中存在
         let ciperStr = base64Encode(path.node.value);
         let bigArrIndex = bigArr.indexOf(ciperStr);
         let index = bigArrIndex;
@@ -80,6 +81,9 @@ traverse(ast, {
             bigArr.push(ciperStr);
             index = bigArr.length - 1;
         }
+
+
+        // 密文替换为数组元素
         let encStr = t.callExpression(
             t.identifier("atob"),
             [t.memberExpression(t.identifier("arr"), t.numericLiteral(index), true)]
@@ -89,11 +93,18 @@ traverse(ast, {
     }
 
 });
+
+// 生成bigArr定义
+// 将数组原算转换为stringLiteral
 bigArr = bigArr.map(function (v) {
     return t.stringLiteral(v);
 });
+// 声明数组
 bigArr = t.variableDeclarator(t.identifier("arr"), t.arrayExpression(bigArr));
+// 定义变量
 bigArr = t.variableDeclaration("var", [bigArr]);
+
+// 将代码放到源码开头
 ast.program.body.unshift(bigArr);
 // 将处理后的AST转为js代码
 let code = generator(ast).code;
