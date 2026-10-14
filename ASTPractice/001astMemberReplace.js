@@ -9,7 +9,7 @@ const generator = require("@babel/generator").default; // 将AST转为JS代码
 
 
 // 读取原始js代码
-const jscode = fs.readFileSync("./ast实战dateDemo.js", { encoding: "utf-8" });
+const jscode = fs.readFileSync("./dateDemo.js", { encoding: "utf-8" });
 
 // 定义parser配置
 let parseConfig = { sourceType: 'script' }; // 默认配置
