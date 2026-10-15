@@ -66,3 +66,4 @@ code = code.replace(/\\\\x/g, "\\x");
 
 // 将代码写入新文件
 fs.writeFile("./demoNew.js", code, (error) => { });
+console.log("AST处理完毕！");
